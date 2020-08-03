@@ -1,0 +1,53 @@
+.topnav {
+  text-align: center;
+  color: $color-font;
+  font-weight: bold;
+  background-color: $color-basicBright;
+
+  &__container {
+    padding: 15px!important;
+  }
+
+  &__btn {
+    border-radius: 5px;
+    border: 1.5px solid $color-primary;
+    margin: 10px auto;
+    font-weight: bold;
+    width: 50%;
+
+
+    &--signup {
+      background-color: $color-primary;
+      color: $color-white!important;
+    }
+
+    &--login {
+      background-color: $color-white;
+      color: $color-primary!important;
+    }
+  }
+
+  @include xl {
+    padding: 8px 30px!important;
+
+    &__container {
+      padding: unset!important;
+    }
+    &__btn {
+      margin: 0px 10px;
+      width: auto;
+      padding: 8px 16px!important;
+    }
+  }
+}
+
+.dropdown {
+  &__icon {
+    margin-right: 10px;
+    display: inline-block;
+  }
+}
+
+.dropdown-toggle::after {
+  border: none!important;
+}

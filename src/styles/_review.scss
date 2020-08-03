@@ -1,0 +1,36 @@
+.reviews {
+  &__title{
+    margin: 30px 0 0;
+  }
+  &__boxes {
+    display: flex!important;
+    flex-direction: row;
+    flex-wrap: wrap!important;
+    width: 100%!important;
+  }
+  &__wrapper{
+    margin: 15px auto;
+    padding: 10px;
+    flex: 1!important;
+  }
+  &__top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__icon{
+    color: $color-accent;
+    margin-right: 5px;
+    font-size: 28px;
+  }
+  &__avatar{
+    background-color: $color-secondary;
+    color: $color-white;
+    font-size: 22px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 15px;
+  }
+}

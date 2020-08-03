@@ -1,0 +1,58 @@
+.login {
+  background-image: url("/images/bg.svg");
+  background-position: center;
+  background-repeat: repeat;
+
+  &__form {
+    background-color: $color-basicBright;
+    max-width: 95%;
+    margin: 70px auto;
+    padding: 40px 15px;
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 5px 30px 0 rgba(4,20,37,.7);
+    -moz-box-shadow: 5px 5px 30px 0 rgba(4,20,37,.7);
+    box-shadow: 5px 5px 20px 0 rgba(4,20,37,.7);
+  }
+
+  &__title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: $color-basicDark;
+  }
+
+  &__forgot {
+    font-weight: bold;
+    color: $color-accent;
+    margin: 30px 0;
+  }
+
+  &__submit {
+    background-color: $color-primary!important;
+    font-weight: bold;
+    margin: 30px auto 0!important;
+    width: 80%;
+    display: block;
+  }
+
+  &__terms {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  @include md {
+    &__form {
+      padding: 40px;
+    }
+
+    &__submit {
+      max-width: 50%;
+    }
+  }
+  @include xl {
+    &__submit {
+      max-width: 30%;
+    }
+  }
+}

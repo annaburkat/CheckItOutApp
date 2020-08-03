@@ -1,0 +1,9 @@
+.footer {
+  margin-top: 50px;
+  background-color: $color-primary;
+  color: $color-white;
+
+  &__link{
+      color: $color-white;
+  }
+}

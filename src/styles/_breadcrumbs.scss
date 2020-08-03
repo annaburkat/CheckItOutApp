@@ -1,0 +1,19 @@
+.breadcrumbs {
+  margin: 10px 0;
+
+  ol {
+    background-color: transparent;
+    padding-left: 0px!important;
+    margin-bottom: 0;
+  }
+
+  &__link {
+    a {
+        color: $color-primary!important;
+    }
+
+    &--current {
+      color: $color-basicDark!important;
+    }
+  }
+}
