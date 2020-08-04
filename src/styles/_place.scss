@@ -53,6 +53,9 @@
       }
     }
     @include lg {
+      &__top{
+        margin-bottom: 20px;
+      }
       &__sharing {
         display: none;
       }

@@ -25,16 +25,7 @@ export default function User(props) {
     axios.post('http://localhost:5000/api/v1/users/login', user)
     .then(function (response) {
       console.log(user, response.data);
-    {/*  Cookie.set('jwtToken', response.data.jwtToken)
-
-      localStorage.setItem("jwtToken", `Bearer ${response.data.jwtToken}`);
-            localStorage.setItem("jwt", `Bearer ${response.data.token}`);
-                  document.cookie = `jwt=${response.data.token}`;
-                      localStorage.setItem("jwt", `Bearer ${response.data.token}`);
-    */}
-
       Cookies.set('jwt', response.data.token);
-
       props.history.push('/');
     })
     .catch(function (error) {

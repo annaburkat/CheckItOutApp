@@ -1,5 +1,14 @@
-.form{
-  &__title{
-    margin: 30px auto!important;
+.form {
+  &__title {
+    margin: 50px auto 0px!important;
+  }
+
+  &__switch {
+    margin: 20px auto;
+    display: inline-block;
+  }
+  &__btn{
+    float: right;
+    background-color: $color-primary!important;
   }
 }

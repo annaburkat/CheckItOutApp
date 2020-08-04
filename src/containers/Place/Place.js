@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Container, Row, Col, Image, Breadcrumb, Card } from 'react-bootstrap';
+import { Container, Row, Col, Image, Breadcrumb, Card, Button } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 import {
   EmailShareButton,
@@ -22,6 +22,7 @@ export default function Place(props) {
 
   const placeId = props.location.state.placeId;
   const url = window.location.href;
+  const slug = place.slug;
 
   useEffect(() => {
     axios
@@ -53,11 +54,25 @@ export default function Place(props) {
       <TopNavbar history={props.history}/>
       <Container className="place">
         <Breadcrumbs name={place.name}/>
-        <Row>
-          <Col xs={12} xl={{span: 10, offset: 1}} className="place__title">
+        <Row className="place__top">
+          <Col xs={10} lg={{span: 9, offset: 1}} className="place__title">
             <h1 className="page__title">{place.name}</h1>
           </Col>
-          <Col xs={12} md={11} xl={{span: 10, offset: 1}} className="place__img-wrapper" >
+          <Col xs={2} lg={2} className="place__title">
+            <Link
+              to={{
+                pathname: `/update-place/${place.slug}`,
+                state: {
+                  placeId: place._id,
+                  placeSlug: slug
+                }
+                }}>
+                <Button>Edit {place.name}</Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={11} lg={{span: 10, offset: 1}} className="place__img-wrapper" >
             <span className="place__sticker">{place.city} / {place.category}</span>
             <Image src={place.imageCover} className="place__img"/>
           </Col>
@@ -77,15 +92,16 @@ export default function Place(props) {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} xl={{span: 10, offset: 1}}>
+          <Col xs={12} lg={{span: 10, offset: 1}}>
             <span className="place__info">
               <FontAwesomeIcon className='place__info-icon' icon='map-marker-alt' />{place.address}
             </span>
           </Col>
-          <Col xs={12} xl={{span: 10, offset: 1}}>
+          <Col xs={12} lg={{span: 10, offset: 1}}>
             <div>{place.description}</div>
           </Col>
         </Row>
+        { reviews.length > 1 ?
         <div className="reviews">
           <Row>
             <Col xs={12} lg={{span: 10, offset: 1}} className="reviews__title">
@@ -115,6 +131,8 @@ export default function Place(props) {
             }
           </Row>
         </div>
+        : null
+      }
       </Container>
       <Footer history={props.history}/>
     </div>

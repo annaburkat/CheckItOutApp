@@ -44,17 +44,17 @@ export default function NewUser(props) {
               <h1 className='login__title'>Sign in</h1>
               <Form.Group controlId="name">
                 <Form.Label>Name*</Form.Label>
-                <Form.Control type="text" placeholder="Name" onChange={handleChange}/>
+                <Form.Control type="text" placeholder="Name" onChange={handleChange} required/>
               </Form.Group>
 
               <Form.Group controlId="email">
                 <Form.Label>Email address*</Form.Label>
-                <Form.Control type="email" placeholder="Enter email"  onChange={handleChange}/>
+                <Form.Control type="email" placeholder="Enter email"  onChange={handleChange} required/>
               </Form.Group>
 
               <Form.Group controlId="password">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password"  onChange={handleChange}/>
+                <Form.Control type="password" placeholder="Password"  onChange={handleChange} required/>
                 <Form.Text className="text-muted">
                   Your password must be longer than 6 characters.
                 </Form.Text>
@@ -62,7 +62,7 @@ export default function NewUser(props) {
 
               <Form.Group controlId="passwordConfirm">
                 <Form.Label>Confirm Password*</Form.Label>
-                <Form.Control type="password" placeholder="Confirm Password"  onChange={handleChange}/>
+                <Form.Control type="password" placeholder="Confirm Password"  onChange={handleChange} required/>
               </Form.Group>
 
               <Button variant="primary" type="submit" className='login__submit'>

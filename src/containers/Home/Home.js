@@ -13,7 +13,7 @@ export default function Home(props) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/places?limit=6', {withCredentials: true})
+    axios.get('http://localhost:5000/api/v1/places/top-six', {withCredentials: true})
     .then(function (response) {
       console.log(response)
       // handle success
@@ -39,13 +39,6 @@ export default function Home(props) {
           places.length ?
             places.map(place =>
                 <Col key={place._id} xs={12} sm={6} lg={4}>
-                <Link
-                  to={{
-                  pathname: `/places/${place.slug}`,
-                  state: {
-                    placeId: place._id
-                  }
-                  }}>
                   <Card className="home-card">
                     <span className="home-card__sticker">{place.city} / {place.category}</span>
                     <Card.Img variant="top" src={place.imageCover} className="home-card__img"/>
@@ -56,7 +49,6 @@ export default function Home(props) {
                       </Card.Text>
                     </Card.Body>
                   </Card>
-                                </Link>
                 </Col>
 
             )

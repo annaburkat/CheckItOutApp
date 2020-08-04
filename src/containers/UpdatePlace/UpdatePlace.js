@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import { Form, Button, Container, Col, Row  } from 'react-bootstrap';
+import { Form, Button, Container, Col, Row } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
 import Footer from "../../components/Footer";
 
-export default function NewPlace(props) {
-  const [newPlace, setNewPlace] = useState({
+export default function UpdatePlace(props) {
+  const [updatePlace, setUpdatePlace] = useState({
     name: '',
     category: '',
     address: '',
@@ -24,22 +24,35 @@ export default function NewPlace(props) {
     priceRange: '',
     averagePrice: '',
     kidFriendly: '',
-    imageCover: ''
+    imageCover: '',
+    slug: ''
   });
 
+  const placeId = props.location.state.placeId;
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/places/${placeId}`, {withCredentials: true})
+    .then(function (response) {
+      // handle success
+      setUpdatePlace(response.data.data.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+  }, []);
 
   function handleSelect(event) {
-    console.log(newPlace);
-    setNewPlace({
-      ...newPlace,
+    setUpdatePlace({
+      ...updatePlace,
       [event.target.name]: event.target.value
     })
   };
 
   function handleChange(event) {
-    console.log(newPlace);
-    setNewPlace({
-      ...newPlace,
+    console.log(updatePlace);
+    setUpdatePlace({
+      ...updatePlace,
       [event.target.id]: event.target.value
     })
   };
@@ -48,35 +61,37 @@ export default function NewPlace(props) {
     event.preventDefault();
     const token = Cookies.get('jwt');
     if (token !== null) {
-      axios.post('http://localhost:5000/api/v1/places', newPlace, {withCredentials: true})
+      axios.patch('http://localhost:5000/api/v1/places', updatePlace, {withCredentials: true})
       .then(function (response) {
         console.log(response);
-        props.history.push('/profile');
+        props.history.push('/places');
       })
       .catch(function (error) {
         console.log(error.message);
       });
     } else {
-      props.history.push('./newPlace')
+      props.history.push('./login')
     }
   };
-
-
 
   return (
     <div className="form">
       <TopNavbar history={props.history}/>
       <Container>
+        <Row className="place__top">
+          <Col xs={12} className="page__title form__title text-center">
+            <h1 className="page__title">{updatePlace.name}</h1>
+          </Col>
+        </Row>
         <Row>
           <Col xs={12} lg={{offset:2, span: 8}}>
               <Form onSubmit={handleSubmit}>
-                <h1 className="page__title form__title text-center">Share wit us your favourite place</h1>
                 <Form.Group controlId="name">
                   <Form.Label>Name*</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Name"
-                    value={newPlace.name}
+                    value={updatePlace.name}
                     onChange={handleChange}
                     required/>
                   <Form.Text className="text-muted">
@@ -89,7 +104,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     as="select"
                     name="category"
-                    value={newPlace.category}
+                    value={updatePlace.category}
                     onChange={handleSelect}
                     required>
                     <option value="">Select Category</option>
@@ -107,7 +122,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     as="select"
                     name="country"
-                    value={newPlace.country}
+                    value={updatePlace.country}
                     onChange={handleSelect}
                     >
                       <option value="">Select Category</option>
@@ -365,8 +380,8 @@ export default function NewPlace(props) {
                     <CountryDropdown
                       className="form-control"
                       name="country"
-                      value={newPlace.country}
-                      onChange={(e) => setNewPlace(e)}
+                      value={updatePlace.country}
+                      onChange={(e) => setUpdatePlace(e)}
                       id="country"
                       required
                     />
@@ -377,7 +392,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="City"
-                    value={newPlace.city}
+                    value={updatePlace.city}
                     onChange={handleChange}
                     />
                 </Form.Group>
@@ -387,7 +402,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="Address"
-                    value={newPlace.address}
+                    value={updatePlace.address}
                     onChange={handleChange}
                     />
                   <Form.Text className="text-muted">
@@ -400,7 +415,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="Opening"
-                    value={newPlace.opening}
+                    value={updatePlace.opening}
                     onChange={handleChange}
                   />
                   <Form.Text className="text-muted">
@@ -413,7 +428,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="tel"
                     placeholder="Phone number"
-                    value={newPlace.contact}
+                    value={updatePlace.contact}
                     onChange={handleChange}
                     />
                 </Form.Group>
@@ -424,7 +439,7 @@ export default function NewPlace(props) {
                     as="textarea"
                     rows="3"
                     onChange={handleChange}
-                    value={newPlace.description}/>
+                    value={updatePlace.description}/>
                 </Form.Group>
 
                 <Form.Group controlId="imageCover">
@@ -432,7 +447,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="url"
                     placeholder="Image"
-                    value={newPlace.imageCover}
+                    value={updatePlace.imageCover}
                     onChange={handleChange}
                   />
                   <Form.Text className="text-muted">
@@ -445,7 +460,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="Website"
-                    value={newPlace.website}
+                    value={updatePlace.website}
                     onChange={handleChange}
                     />
                   <Form.Text className="text-muted">
@@ -458,7 +473,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="Facebook"
-                    value={newPlace.fb}
+                    value={updatePlace.fb}
                     onChange={handleChange}
                     />
                   <Form.Text className="text-muted">
@@ -471,7 +486,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="text"
                     placeholder="Instagram"
-                    value={newPlace.instagram}
+                    value={updatePlace.instagram}
                     onChange={handleChange}
                     />
                   <Form.Text className="text-muted">
@@ -484,7 +499,7 @@ export default function NewPlace(props) {
                   <Form.Control
                     as="select"
                     name="priceRange"
-                    value={newPlace.priceRange}
+                    value={updatePlace.priceRange}
                     onChange={handleSelect}
                     >
                     <option value="">Select Category</option>
@@ -499,11 +514,11 @@ export default function NewPlace(props) {
                   <Form.Control
                     type="number"
                     placeholder="averagePrice"
-                    value={newPlace.averagePrice}
+                    value={updatePlace.averagePrice}
                     onChange={handleChange}
                     />
                   <Form.Text className="text-muted">
-                    How much do you usually spend in {newPlace.name !== '' ? newPlace.name : 'this place'}?
+                    How much do you usually spend in {updatePlace.name !== '' ? updatePlace.name : 'this place'}?
                   </Form.Text>
                 </Form.Group>
 
@@ -513,7 +528,7 @@ export default function NewPlace(props) {
                   type="switch"
                   id="kidFriendly"
                   label="Is this place kids friendly?"
-                  value={newPlace.kidFriendly}
+                  value={updatePlace.kidFriendly}
                   onChange={handleChange}
                 />
 

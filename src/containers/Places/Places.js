@@ -14,14 +14,14 @@ export default function Places(props) {
 
   useEffect(() => {
     axios
-    .get(`http://localhost:5000/api/v1/places/${query}`, {withCredentials: true})
-    .then(function (response) {
-      // handle success
-      setPlaces(response.data)
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      .get(`http://localhost:5000/api/v1/places/${query}`, {withCredentials: true})
+      .then(function (response) {
+        // handle success
+        setPlaces(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }, []);
 
   return (
