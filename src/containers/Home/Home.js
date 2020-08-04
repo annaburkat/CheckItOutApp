@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, Col, Card, Row, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Link  } from "react-router-dom";
 
 import TopNavbar from "../../components/TopNavbar";
 import Hero from "../../components/Hero";
@@ -11,7 +13,7 @@ export default function Home(props) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/places', {withCredentials: true})
+    axios.get('http://localhost:5000/api/v1/places?limit=6', {withCredentials: true})
     .then(function (response) {
       console.log(response)
       // handle success
@@ -29,11 +31,38 @@ export default function Home(props) {
       <Hero/>
       <Container>
         <Categories/>
+        <Row className="home__places">
+          <Col xs={12} sm={12} lg={12} className="home__subtitle">
+            <h2 className="page__subtile">The best places</h2>
+          </Col>
         {
           places.length ?
-            places.map(place => <p key={place._id}>{place.name}</p>)
+            places.map(place =>
+                <Col key={place._id} xs={12} sm={6} lg={4}>
+                <Link
+                  to={{
+                  pathname: `/places/${place.slug}`,
+                  state: {
+                    placeId: place._id
+                  }
+                  }}>
+                  <Card className="home-card">
+                    <span className="home-card__sticker">{place.city} / {place.category}</span>
+                    <Card.Img variant="top" src={place.imageCover} className="home-card__img"/>
+                    <Card.Body className="home-card__text">
+                      <Card.Title className="home-card__titke">{place.name}</Card.Title>
+                      <Card.Text className="home-card__desc">
+                        {place.description}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                                </Link>
+                </Col>
+
+            )
           : null
         }
+        </Row>
       </Container>
       <Footer history={props.history}/>
     </div>

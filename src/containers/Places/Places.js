@@ -22,7 +22,7 @@ export default function Places(props) {
     .catch(function (error) {
       console.log(error);
     })
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -30,13 +30,15 @@ export default function Places(props) {
       <Hero/>
       <Container>
         <Row>
-          <Col xs={12}>
+          <Col xs={12} className="place-card__title">
             <h1 className="page__title">Places worth visiting</h1>
           </Col>
+        </Row>
+        <Row className="place-card__wrapper">
             {
               places.length ?
                 places.map(place =>
-                  <Col key={place._id} xs={12} sm={6} lg={4}>
+                  <Col key={place._id} xs={12} sm={6} lg={4} className="place-card__box">
                     <Card className="place-card">
                       <span className="place-card__sticker">{place.city} / {place.category}</span>
                       <Card.Img variant="top" src={place.imageCover} className="place-card__img"/>
@@ -81,6 +83,7 @@ export default function Places(props) {
                           Check It Out
                         </Card.Body>
                       </Link>
+
                     </Card>
                   </Col>
                 )
