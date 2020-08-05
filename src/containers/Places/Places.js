@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Container, Row, Col, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -30,8 +30,16 @@ export default function Places(props) {
       <Hero/>
       <Container>
         <Row>
-          <Col xs={12} className="place-card__title">
+          <Col xs={10} lg={{span: 9, offset: 1}} className="place-card__title">
             <h1 className="page__title">Places worth visiting</h1>
+          </Col>
+          <Col xs={2} lg={2} className="place__title">
+            <Link
+              to={{
+                pathname: `/new-place`,
+                }}>
+                <Button>Add new place</Button>
+            </Link>
           </Col>
         </Row>
         <Row className="place-card__wrapper">
