@@ -101,7 +101,7 @@ export default function Place(props) {
             <div>{place.description}</div>
           </Col>
         </Row>
-        { reviews.length > 1 ?
+        { reviews.length ?
         <div className="reviews">
           <Row>
             <Col xs={12} lg={{span: 10, offset: 1}} className="reviews__title">
@@ -131,7 +131,21 @@ export default function Place(props) {
             }
           </Row>
         </div>
-        : null
+        :
+        <Row>
+          <Col xs={10} lg={{span: 9, offset: 1}} className="place__title">
+            <h1 className="page__title">Do you know {place.name}?</h1>
+            <Link
+              to={{
+                pathname: `/places/${place.slug}/reviews`,
+                state: {
+                  placeId: place._id
+                }
+                }}>
+                <Button>Add review</Button>
+            </Link>
+          </Col>
+        </Row>
       }
       </Container>
       <Footer history={props.history}/>

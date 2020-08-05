@@ -10,6 +10,7 @@ import Profile from './containers/Profile/Profile';
 import Signup from './containers/Signup/Signup';
 import NewPlace from './containers/NewPlace/NewPlace';
 import UpdatePlace from './containers/UpdatePlace/UpdatePlace';
+import NewReview from './containers/NewReview/NewReview';
 
 export default ({ childProps }) =>
   <Switch>
@@ -22,5 +23,6 @@ export default ({ childProps }) =>
     <Route path="/places" exact component={Places} props={childProps} />
     <Route path="/profile" exact component={Profile} props={childProps} />
     <Route path="/new-place" exact component={NewPlace} props={childProps} />
+    <Route path="/places/:slug/reviews" exact component={NewReview} props={childProps} />
     <Route component={NotFound} />
   </Switch>;

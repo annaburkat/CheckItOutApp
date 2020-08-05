@@ -70,7 +70,7 @@ export default function NewPlace(props) {
         <Row>
           <Col xs={12} lg={{offset:2, span: 8}}>
               <Form onSubmit={handleSubmit}>
-                <h1 className="page__title form__title text-center">Share wit us your favourite place</h1>
+                <h1 className="page__title form__title text-center">Share with us your favourite place</h1>
                 <Form.Group controlId="name">
                   <Form.Label>Name*</Form.Label>
                   <Form.Control
@@ -487,8 +487,8 @@ export default function NewPlace(props) {
                     value={newPlace.priceRange}
                     onChange={handleSelect}
                     >
-                    <option value="">Select Category</option>
-                    <option value="low">High</option>
+                    <option value="">Select Price Range</option>
+                    <option value="low">Low</option>
                     <option value="middle">Middle</option>
                     <option value="high">High</option>
                   </Form.Control>
