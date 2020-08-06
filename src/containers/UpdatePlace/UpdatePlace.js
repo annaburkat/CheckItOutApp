@@ -61,7 +61,13 @@ export default function UpdatePlace(props) {
     event.preventDefault();
     const token = Cookies.get('jwt');
     if (token !== null) {
-      axios.patch('http://localhost:5000/api/v1/places', updatePlace, {withCredentials: true})
+      let formattedPlace={};
+        for (let prop in updatePlace) {
+          if (updatePlace[prop] !== '' && updatePlace[prop].length > 0) {
+          formattedPlace[prop] = updatePlace[prop]
+        }
+      }
+      axios.patch(`http://localhost:5000/api/v1/places/${placeId}`, formattedPlace)
       .then(function (response) {
         console.log(response);
         props.history.push('/places');

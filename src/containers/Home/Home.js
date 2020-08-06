@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Col, Card, Row, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
@@ -7,13 +8,25 @@ import { Link  } from "react-router-dom";
 import TopNavbar from "../../components/TopNavbar";
 import Hero from "../../components/Hero";
 import Categories from "../../components/Categories";
+import CategoriesLinks from "../../components/CategoriesLinks";
 import Footer from "../../components/Footer";
 
 export default function Home(props) {
   const [places, setPlaces] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/places/top-six', {withCredentials: true})
+    const token = Cookies.get('jwt');
+    console.log(token)
+    if (token !== null && token !== undefined) {
+      setLoggedIn(true)
+    } else {
+      setLoggedIn(false)
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/v1/places/top-six')
     .then(function (response) {
       console.log(response)
       // handle success
@@ -23,14 +36,18 @@ export default function Home(props) {
       // handle error
       console.log(error);
     })
-  }, [])
+  }, []);
 
   return (
     <div>
       <TopNavbar history={props.history}/>
       <Hero/>
       <Container>
-        <Categories/>
+        {
+          loggedIn ?
+          <CategoriesLinks/>
+        : <Categories/>
+        }
         <Row className="home__places">
           <Col xs={12} sm={12} lg={12} className="home__subtitle">
             <h2 className="page__subtile">The best places</h2>

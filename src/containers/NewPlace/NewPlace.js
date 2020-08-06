@@ -23,13 +23,11 @@ export default function NewPlace(props) {
     opening: '',
     priceRange: '',
     averagePrice: '',
-    kidFriendly: '',
     imageCover: ''
   });
 
 
   function handleSelect(event) {
-    console.log(newPlace);
     setNewPlace({
       ...newPlace,
       [event.target.name]: event.target.value
@@ -37,7 +35,6 @@ export default function NewPlace(props) {
   };
 
   function handleChange(event) {
-    console.log(newPlace);
     setNewPlace({
       ...newPlace,
       [event.target.id]: event.target.value
@@ -47,11 +44,21 @@ export default function NewPlace(props) {
   function handleSubmit(event) {
     event.preventDefault();
     const token = Cookies.get('jwt');
+
     if (token !== null) {
-      axios.post('http://localhost:5000/api/v1/places', newPlace, {withCredentials: true})
+      let formattedPlace={};
+        for (let prop in newPlace) {
+          if (newPlace[prop] !== '' && newPlace[prop].length > 0) {
+          formattedPlace[prop] = newPlace[prop]
+        }
+      }
+      axios.post('http://localhost:5000/api/v1/places', formattedPlace)
       .then(function (response) {
-        console.log(response);
-        props.history.push('/profile');
+        Cookies.get('jwt', response.data.token);
+        const createdPlace = response.data.data.data;
+        props.history.push(`/places/${createdPlace.slug}`, {
+            placeId: createdPlace._id
+          });
       })
       .catch(function (error) {
         console.log(error.message);
@@ -506,16 +513,6 @@ export default function NewPlace(props) {
                     How much do you usually spend in {newPlace.name !== '' ? newPlace.name : 'this place'}?
                   </Form.Text>
                 </Form.Group>
-
-
-                <Form.Check
-                  className="form__switch"
-                  type="switch"
-                  id="kidFriendly"
-                  label="Is this place kids friendly?"
-                  value={newPlace.kidFriendly}
-                  onChange={handleChange}
-                />
 
                 <Button type="submit" className="form__btn">
                   Submit

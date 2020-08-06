@@ -44,7 +44,7 @@ export default function TopNavbar(props) {
         </Nav>
         <Nav className='topnav__container'>
           <LinkContainer to='/places'>
-            <Nav.Link href='/'>Places</Nav.Link>
+            <Nav.Link href='/'>All Places</Nav.Link>
           </LinkContainer>
           { loggedIn ?
 
@@ -63,7 +63,6 @@ export default function TopNavbar(props) {
               Log out
             </NavDropdown.Item>
           </NavDropdown>
-
             :
             <>
               <LinkContainer to='/login'>

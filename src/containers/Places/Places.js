@@ -16,7 +16,6 @@ export default function Places(props) {
     axios
       .get(`http://localhost:5000/api/v1/places/${query}`, {withCredentials: true})
       .then(function (response) {
-        // handle success
         setPlaces(response.data)
       })
       .catch(function (error) {
@@ -91,7 +90,6 @@ export default function Places(props) {
                           Check It Out
                         </Card.Body>
                       </Link>
-
                     </Card>
                   </Col>
                 )

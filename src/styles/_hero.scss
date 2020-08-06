@@ -6,7 +6,12 @@
   background-size: contain;
   padding: 50px 25px!important;
   border-radius:0!important;
-  
+
+  &--loggedOut {
+    background-image: url("/images/hero_2.svg");
+    background-color: #DDCC77!important;
+  }
+
   @include xl {
     padding: 100px 50px!important;
   }
