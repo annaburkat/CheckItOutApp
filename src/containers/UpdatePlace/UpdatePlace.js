@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import { Form, Button, Container, Col, Row } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
@@ -69,7 +68,6 @@ export default function UpdatePlace(props) {
       }
       axios.patch(`http://localhost:5000/api/v1/places/${placeId}`, formattedPlace)
       .then(function (response) {
-        console.log(response);
         props.history.push('/places');
       })
       .catch(function (error) {
@@ -381,18 +379,6 @@ export default function UpdatePlace(props) {
                   </Form.Control>
                 </Form.Group>
 
-                {/*  <Form.Group controlId="country">
-                    <Form.Label>Country</Form.Label>
-                    <CountryDropdown
-                      className="form-control"
-                      name="country"
-                      value={updatePlace.country}
-                      onChange={(e) => setUpdatePlace(e)}
-                      id="country"
-                      required
-                    />
-                  </Form.Group>*/}
-
                 <Form.Group controlId="city">
                   <Form.Label>City*</Form.Label>
                   <Form.Control
@@ -509,7 +495,7 @@ export default function UpdatePlace(props) {
                     onChange={handleSelect}
                     >
                     <option value="">Select Category</option>
-                    <option value="low">High</option>
+                    <option value="low">Low</option>
                     <option value="middle">Middle</option>
                     <option value="high">High</option>
                   </Form.Control>
@@ -527,7 +513,6 @@ export default function UpdatePlace(props) {
                     How much do you usually spend in {updatePlace.name !== '' ? updatePlace.name : 'this place'}?
                   </Form.Text>
                 </Form.Group>
-
 
                 <Form.Check
                   className="form__switch"

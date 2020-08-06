@@ -14,6 +14,9 @@ export default function NewUser(props) {
     password: '',
     passwordConfirm: ''
   });
+  const [error, setError] = useState({
+    errorMessage: ''
+  });
 
   function handleChange(event) {
     setNewUser({
@@ -30,7 +33,8 @@ export default function NewUser(props) {
       props.history.push('/');
     })
     .catch(function (error) {
-      console.log(error);
+      setError({errorMessage: error.response.data.message})
+      console.log(error.response);
     });
   };
 
@@ -44,7 +48,11 @@ export default function NewUser(props) {
               <h1 className='login__title'>Sign in</h1>
               <Form.Group controlId="name">
                 <Form.Label>Name*</Form.Label>
-                <Form.Control type="text" placeholder="Name" onChange={handleChange} required/>
+                <Form.Control
+                  type="text"
+                  placeholder="Name"
+                  onChange={handleChange}
+                  required/>
               </Form.Group>
 
               <Form.Group controlId="email">
@@ -53,7 +61,7 @@ export default function NewUser(props) {
               </Form.Group>
 
               <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Password*</Form.Label>
                 <Form.Control type="password" placeholder="Password"  onChange={handleChange} required/>
                 <Form.Text className="text-muted">
                   Your password must be longer than 6 characters.
@@ -64,6 +72,7 @@ export default function NewUser(props) {
                 <Form.Label>Confirm Password*</Form.Label>
                 <Form.Control type="password" placeholder="Confirm Password"  onChange={handleChange} required/>
               </Form.Group>
+              { error.errorMessage && <p className="form__error"> { error.errorMessage } </p> }
 
               <Button variant="primary" type="submit" className='login__submit'>
                 Submit

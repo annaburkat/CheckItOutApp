@@ -1,6 +1,15 @@
 .place {
   &__title{
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__link{
+    display: block;
+  }
+  &__edit-btn {
+    background-color: $color-primary!important;
+    margin-bottom: 15px;
   }
   &__img-wrapper{
     position: relative;
@@ -40,6 +49,9 @@
   &__info-icon {
     margin-right: 10px;
     color: $color-primary;
+  }
+  &__review-btn{
+    background-color: $color-primary!important;
   }
     @include md {
       &__sharing {

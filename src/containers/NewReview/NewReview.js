@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import { Form, Button, Container, Col, Row  } from 'react-bootstrap';
+import { Form, Button, Container, Col, Row, Image  } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
 import Footer from "../../components/Footer";
@@ -12,11 +12,23 @@ export default function NewReview(props) {
     review: '',
     rating: ''
   });
+  const [place, setPlace] = useState([]);
   const placeId = props.location.state.placeId;
+
+  useEffect(() => {
+    axios
+    .get(`http://localhost:5000/api/v1/places/${placeId}`, {withCredentials: true})
+    .then(function (response) {
+      // handle success
+      setPlace(response.data.data.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }, []);
 
 
   function handleSelect(event) {
-    console.log(newReview);
     setNewReview({
       ...newReview,
       [event.target.name]: event.target.value
@@ -24,7 +36,6 @@ export default function NewReview(props) {
   };
 
   function handleChange(event) {
-    console.log(newReview);
     setNewReview({
       ...newReview,
       [event.target.id]: event.target.value
@@ -35,9 +46,15 @@ export default function NewReview(props) {
     event.preventDefault();
     const token = Cookies.get('jwt');
     if (token !== null) {
-      axios.post(`http://localhost:5000/api/v1/places/${placeId}/reviews`, newReview, {withCredentials: true})
+      let formattedReview={};
+        for (let prop in newReview) {
+          if (newReview[prop] !== '' && newReview[prop].length > 0) {
+          formattedReview[prop] = newReview[prop]
+        }
+      }
+      axios.post(`http://localhost:5000/api/v1/places/${placeId}/reviews`, formattedReview)
       .then(function (response) {
-        console.log(response);
+        Cookies.get('jwt', response.data.token);
         props.history.push('/profile');
       })
       .catch(function (error) {
@@ -53,10 +70,16 @@ export default function NewReview(props) {
       <TopNavbar history={props.history}/>
       <Container>
         <Row>
-          <Col xs={12} lg={{offset:2, span: 8}}>
+          <Col xs={12} className="reviews__title">
+            <h1 className="page__title text-center">What do you think about {place.name}?</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} lg={6} className="place__img-wrapper" >
+            <Image src={place.imageCover} className="reviews__img"/>
+          </Col>
+          <Col xs={12} lg={6}>
               <Form onSubmit={handleSubmit}>
-                <h1 className="page__title form__title text-center">Share with us what do you think about this place?</h1>
-
                 <Form.Group controlId="review">
                   <Form.Label>Review</Form.Label>
                   <Form.Control
@@ -66,11 +89,11 @@ export default function NewReview(props) {
                     value={newReview.review}/>
                 </Form.Group>
 
-                <Form.Group controlId="priceRange">
-                  <Form.Label>Price Range</Form.Label>
+                <Form.Group controlId="rating">
+                  <Form.Label>Rating</Form.Label>
                   <Form.Control
                     as="select"
-                    name="priceRange"
+                    name="rating"
                     value={newReview.rating}
                     onChange={handleSelect}
                     >
@@ -78,15 +101,21 @@ export default function NewReview(props) {
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
                   </Form.Control>
                 </Form.Group>
 
-
                 <Button type="submit" className="form__btn">
-                  Submit
+                  Add Review
                 </Button>
               </Form>
-            </Col>
+          </Col>
           </Row>
         </Container>
       <Footer history={props.history}/>

@@ -30,7 +30,6 @@ export default function Hero(props) {
     axios
       .get(`http://localhost:5000/api/v1/places/getCities`, {withCredentials: true})
       .then(function (response) {
-        console.log(response.data.data)
         setPlaces(response.data.data);
       })
       .catch(function (error) {
@@ -38,31 +37,23 @@ export default function Hero(props) {
       })
   }, []);
 
-
-
   return (
     <div>
       { loggedIn ?
         <Jumbotron className="hero">
           <h1 className="hero__title">Experience a city</h1>
+          {
+            places.length ?
           <Form
             className="hero__form"
           >
-          {/*    <Form.Group controlId="formBasicEmail">
-            TODO: add search icon, add button
-              <Form.Control
-                type="text"
-                placeholder="Find perfect spot"
-              />
-            </Form.Group>*/}
-
-            <Form.Group controlId="city">
+            <Form.Group controlId="city" className="hero__input">
               <Form.Control
                 as="select"
                 name="city"
                 onChange={handleSelect}
                 required>
-                <option value="">Select Category</option>
+                <option value="">Select City</option>
                 {
                   places.length ?
                     places.map(x =>
@@ -73,10 +64,12 @@ export default function Hero(props) {
               </Form.Control>
             </Form.Group>
 
-            <Button type="submit" className="form__btn">
-              Submit
+            <Button type="submit" className="hero__btn">
+              Find it!
             </Button>
           </Form>
+          :   null
+        }
         </Jumbotron> :
 
         <Jumbotron className="hero hero--loggedOut">

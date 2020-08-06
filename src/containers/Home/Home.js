@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Container, Col, Card, Row, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Container, Col, Card, Row, } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 
 import TopNavbar from "../../components/TopNavbar";
@@ -17,7 +16,6 @@ export default function Home(props) {
 
   useEffect(() => {
     const token = Cookies.get('jwt');
-    console.log(token)
     if (token !== null && token !== undefined) {
       setLoggedIn(true)
     } else {
@@ -65,6 +63,19 @@ export default function Home(props) {
                         {place.description}
                       </Card.Text>
                     </Card.Body>
+                    {loggedIn ?
+                    <Link
+                      className='place-card__cta'
+                      to={{
+                      pathname: `/places/${place.slug}`,
+                      state: {
+                        placeId: place._id
+                      }
+                      }}>
+                      <Card.Body className='place-card__cta-btn'>
+                        Check It Out
+                      </Card.Body>
+                    </Link> :null}
                   </Card>
                 </Col>
 

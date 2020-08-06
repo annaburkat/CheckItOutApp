@@ -11,4 +11,8 @@
     float: right;
     background-color: $color-primary!important;
   }
+  &__error{
+    color: $color-accent;
+    font-weight: bold;
+  }
 }

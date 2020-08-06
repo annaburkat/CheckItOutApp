@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import { Form, Button, Container, Col, Row  } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
@@ -44,7 +43,6 @@ export default function NewPlace(props) {
   function handleSubmit(event) {
     event.preventDefault();
     const token = Cookies.get('jwt');
-
     if (token !== null) {
       let formattedPlace={};
         for (let prop in newPlace) {
@@ -58,7 +56,7 @@ export default function NewPlace(props) {
         const createdPlace = response.data.data.data;
         props.history.push(`/places/${createdPlace.slug}`, {
             placeId: createdPlace._id
-          });
+        });
       })
       .catch(function (error) {
         console.log(error.message);
@@ -367,18 +365,6 @@ export default function NewPlace(props) {
                   </Form.Control>
                 </Form.Group>
 
-                {/*  <Form.Group controlId="country">
-                    <Form.Label>Country</Form.Label>
-                    <CountryDropdown
-                      className="form-control"
-                      name="country"
-                      value={newPlace.country}
-                      onChange={(e) => setNewPlace(e)}
-                      id="country"
-                      required
-                    />
-                  </Form.Group>*/}
-
                 <Form.Group controlId="city">
                   <Form.Label>City*</Form.Label>
                   <Form.Control
@@ -515,7 +501,7 @@ export default function NewPlace(props) {
                 </Form.Group>
 
                 <Button type="submit" className="form__btn">
-                  Submit
+                  Add New Place
                 </Button>
               </Form>
           </Col>

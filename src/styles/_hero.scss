@@ -4,16 +4,37 @@
   background-position: 95% 2%;
   background-repeat: no-repeat;
   background-size: contain;
-  padding: 50px 25px!important;
-  border-radius:0!important;
+  padding: 50px 25px!important !important;
+  border-radius: 0!important;
 
   &--loggedOut {
     background-image: url("/images/hero_2.svg");
     background-color: #DDCC77!important;
   }
 
-  @include xl {
-    padding: 100px 50px!important;
+  &__form {
+    max-width: 70%;
+    margin: 0 auto;
+    @include md {
+      max-width: 50%;
+      margin-left: 0px;
+    }
+    @include lg {
+      max-width: 30%;
+      margin-left: 0px;
+      display: flex;
+    }
+  }
+
+  &__input{
+    width:300px;
+    margin-right: 20px;
+  }
+
+  &__btn {
+    width: 100px;
+    height: 38px;
+    background-color: $color-primary!important;
   }
 
   &__title {
@@ -23,10 +44,7 @@
     margin-bottom: 25px;
   }
 
-  &__form {
-    max-width: 90%;
-    @include md {
-      max-width: 50%;
-    }
+  @include xl {
+    padding: 100px 50px!important !important;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Container, Row, Col, Image, Breadcrumb, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card, Button } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 import {
   EmailShareButton,
@@ -55,11 +55,10 @@ export default function Place(props) {
       <Container className="place">
         <Breadcrumbs name={place.name}/>
         <Row className="place__top">
-          <Col xs={10} lg={{span: 9, offset: 1}} className="place__title">
+          <Col xs={12} lg={{span: 10, offset: 1}} className="place__title">
             <h1 className="page__title">{place.name}</h1>
-          </Col>
-          <Col xs={2} lg={2} className="place__title">
             <Link
+              className="place__link"
               to={{
                 pathname: `/update-place/${place.slug}`,
                 state: {
@@ -67,7 +66,7 @@ export default function Place(props) {
                   placeSlug: slug
                 }
                 }}>
-                <Button>Edit {place.name}</Button>
+                <Button className="place__edit-btn">Edit {place.name}</Button>
             </Link>
           </Col>
         </Row>
@@ -104,8 +103,20 @@ export default function Place(props) {
         { reviews.length ?
         <div className="reviews">
           <Row>
-            <Col xs={12} lg={{span: 10, offset: 1}} className="reviews__title">
+            <Col xs={10} lg={{span: 9, offset: 1}} className="reviews__title">
               <h1 className="page__title">Reviews</h1>
+            </Col>
+            <Col xs={2} lg={2} className="place__title">
+              <Link
+                to={{
+                  pathname: `/places/${place._id}/reviews`,
+                  state: {
+                    placeId: place._id,
+                    placeSlug: slug
+                  }
+                  }}>
+                  <Button>Add review</Button>
+              </Link>
             </Col>
           </Row>
           <Row className="reviews__boxes">
@@ -133,16 +144,17 @@ export default function Place(props) {
         </div>
         :
         <Row>
-          <Col xs={10} lg={{span: 9, offset: 1}} className="place__title">
+          <Col xs={12} lg={{span: 10, offset: 1}} className="place__title">
             <h1 className="page__title">Do you know {place.name}?</h1>
             <Link
+
               to={{
                 pathname: `/places/${place.slug}/reviews`,
                 state: {
                   placeId: place._id
                 }
                 }}>
-                <Button>Add review</Button>
+                <Button className="place__review-btn">Add review</Button>
             </Link>
           </Col>
         </Row>
@@ -152,3 +164,5 @@ export default function Place(props) {
     </div>
   );
 }
+
+    // axios.post(`http://localhost:5000/places/${placeId}/reviews`, formattedReview)
