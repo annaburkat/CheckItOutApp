@@ -43,6 +43,7 @@ export default function NewReview(props) {
   function handleSubmit(event) {
     event.preventDefault();
     const token = Cookies.get('jwt');
+    console.log(token);
     if (token !== null) {
       let formattedReview={};
         for (let prop in newReview) {

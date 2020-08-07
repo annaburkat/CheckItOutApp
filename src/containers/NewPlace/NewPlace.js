@@ -24,7 +24,9 @@ export default function NewPlace(props) {
     averagePrice: '',
     imageCover: ''
   });
-
+  const [error, setError] = useState({
+    errorMessage: ''
+  });
 
   function handleSelect(event) {
     setNewPlace({
@@ -59,6 +61,7 @@ export default function NewPlace(props) {
         });
       })
       .catch(function (error) {
+        setError({errorMessage: error.response.data.message});
         console.log(error.message);
       });
     } else {
@@ -499,6 +502,8 @@ export default function NewPlace(props) {
                     How much do you usually spend in {newPlace.name !== '' ? newPlace.name : 'this place'}?
                   </Form.Text>
                 </Form.Group>
+
+                { error.errorMessage && <p className="form__error"> { error.errorMessage } </p> }
 
                 <Button type="submit" className="form__btn">
                   Add New Place

@@ -1,0 +1,11 @@
+.notfound {
+  &__img{
+    margin: 0px auto 50px;
+    max-height: 300px;
+    display: block;
+  }
+  &__title{
+    color: $color-accent;
+    margin-top: 30px;
+  }
+}

@@ -15,7 +15,7 @@ export default function TopNavbar(props) {
     } else {
       setLoggedIn(false)
     }
-  }, [])
+  }, []);
 
   function logout() {
     Cookies.remove('jwt');
@@ -26,7 +26,6 @@ export default function TopNavbar(props) {
     }
   }
 
-// Icons made by <a href='https://www.flaticon.com/free-icon/origami_2928685?term=paper%20plane&page=1&position=14' title='Good Ware'>Good Ware</a> from <a href='https://www.flaticon.com/' title='Flaticon'> www.flaticon.com</a>
   return (
     <Navbar className='topnav' expand='xl'>
       <Navbar.Brand href='/'>

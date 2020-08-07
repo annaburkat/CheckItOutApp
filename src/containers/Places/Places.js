@@ -28,16 +28,15 @@ export default function Places(props) {
       <TopNavbar history={props.history}/>
       <Hero/>
       <Container>
-        <Row>
-          <Col xs={10} lg={{span: 9, offset: 1}} className="place-card__title">
+        <Row className="place__top">
+          <Col xs={12} lg={{span: 12}}  className="place__title">
             <h1 className="page__title">Places worth visiting</h1>
-          </Col>
-          <Col xs={2} lg={2} className="place__title">
             <Link
+              className="place__link"
               to={{
                 pathname: `/new-place`,
                 }}>
-                <Button>Add new place</Button>
+                <Button className="place__edit-btn">Add new place</Button>
             </Link>
           </Col>
         </Row>

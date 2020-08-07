@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Container, Col, Card, Row, } from 'react-bootstrap';
+import { Container, Col, Card, Row, Jumbotron } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 
 import TopNavbar from "../../components/TopNavbar";
-import Hero from "../../components/Hero";
 import Categories from "../../components/Categories";
 import CategoriesLinks from "../../components/CategoriesLinks";
 import Footer from "../../components/Footer";
@@ -39,7 +38,11 @@ export default function Home(props) {
   return (
     <div>
       <TopNavbar history={props.history}/>
-      <Hero/>
+      <Jumbotron className="hero hero--loggedOut">
+        <Container>
+          <h1 className="hero__title">Check It Out</h1>
+        </Container>
+      </Jumbotron>
       <Container>
         {
           loggedIn ?

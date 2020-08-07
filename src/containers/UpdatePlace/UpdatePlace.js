@@ -22,9 +22,11 @@ export default function UpdatePlace(props) {
     opening: '',
     priceRange: '',
     averagePrice: '',
-    kidFriendly: '',
     imageCover: '',
     slug: ''
+  });
+  const [error, setError] = useState({
+    errorMessage: ''
   });
 
   const placeId = props.location.state.placeId;
@@ -37,6 +39,7 @@ export default function UpdatePlace(props) {
     })
     .catch(function (error) {
       // handle error
+      setError({errorMessage: error.response.data.message});
       console.log(error);
     })
   }, []);
@@ -68,7 +71,10 @@ export default function UpdatePlace(props) {
       }
       axios.patch(`http://localhost:5000/api/v1/places/${placeId}`, formattedPlace)
       .then(function (response) {
-        props.history.push('/places');
+        const updatedPlace = response.data.data.data;
+        props.history.push(`/places/${updatedPlace.slug}`, {
+            placeId: updatedPlace._id
+        });
       })
       .catch(function (error) {
         console.log(error.message);
@@ -514,14 +520,7 @@ export default function UpdatePlace(props) {
                   </Form.Text>
                 </Form.Group>
 
-                <Form.Check
-                  className="form__switch"
-                  type="switch"
-                  id="kidFriendly"
-                  label="Is this place kids friendly?"
-                  value={updatePlace.kidFriendly}
-                  onChange={handleChange}
-                />
+                { error.errorMessage && <p className="form__error"> { error.errorMessage } </p> }
 
                 <Button type="submit" className="form__btn">
                   Submit

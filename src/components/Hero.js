@@ -41,7 +41,7 @@ export default function Hero(props) {
     <div>
       { loggedIn ?
         <Jumbotron className="hero">
-          <h1 className="hero__title">Experience a city</h1>
+          <h1 className="hero__title">All Placess</h1>
           {
             places.length ?
           <Form

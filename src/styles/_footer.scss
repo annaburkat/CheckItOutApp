@@ -3,7 +3,16 @@
   background-color: $color-primary;
   color: $color-white;
 
-  &__link{
-      color: $color-white;
+  &__logo {
+    max-width: 150px;
+    display:block;
+  }
+  &__link {
+    color: $color-white;
+    &:hover {
+      color: $color-secondary;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
 }
