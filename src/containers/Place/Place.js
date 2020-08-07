@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { Container, Row, Col, Image, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card, Button, ListGroupItem, ListGroup } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 import {
   EmailShareButton,
@@ -94,8 +94,35 @@ export default function Place(props) {
               <FontAwesomeIcon className='place__info-icon' icon='map-marker-alt' />{place.address}
             </span>
           </Col>
-          <Col xs={12} lg={{span: 10, offset: 1}}>
+        </Row>
+        <Row>
+          <Col xs={12} lg={6}>
             <div>{place.description}</div>
+          </Col>
+          <Col xs={12} lg={6}>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>
+                <FontAwesomeIcon className='place-card__icon' icon='map-marker-alt' />{place.address}</ListGroupItem>
+              <ListGroupItem>
+                <FontAwesomeIcon className='place-card__icon' icon='clock' />{place.opening}</ListGroupItem>
+              <ListGroupItem className="place-card__social-icons">
+                {place.website ?
+                  <a href={place.website} target='_blank' rel="noopener noreferrer" >
+                    <FontAwesomeIcon className='place-card__social-icon' icon='globe' />
+                  </a>
+                  : null}
+                {place.instagram ?
+                  <a href={place.instagram} target='_blank' rel="noopener noreferrer" >
+                    <FontAwesomeIcon className='place-card__social-icon'  icon={['fab', 'instagram']}  />
+                  </a>
+                  : null}
+                {place.fb ?
+                  <a href={place.fb} target='_blank' rel="noopener noreferrer" >
+                    <FontAwesomeIcon className='place-card__social-icon'  icon={['fab', 'facebook']} />
+                  </a>
+                  : null}
+              </ListGroupItem>
+            </ListGroup>
           </Col>
         </Row>
         { reviews.length ?

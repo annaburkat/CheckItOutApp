@@ -19,7 +19,7 @@ export default function Places(props) {
         setPlaces(response.data)
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error.message);
       })
   }, []);
 
@@ -54,29 +54,6 @@ export default function Places(props) {
                           {place.description}
                         </Card.Text>
                       </Card.Body>
-                      <ListGroup className="list-group-flush">
-                        <ListGroupItem>
-                          <FontAwesomeIcon className='place-card__icon' icon='map-marker-alt' />{place.address}</ListGroupItem>
-                        <ListGroupItem>
-                          <FontAwesomeIcon className='place-card__icon' icon='clock' />{place.opening}</ListGroupItem>
-                        <ListGroupItem className="place-card__social-icons">
-                          {place.website ?
-                            <a href={place.website} target='_blank' rel="noopener noreferrer" >
-                              <FontAwesomeIcon className='place-card__social-icon' icon='globe' />
-                            </a>
-                            : null}
-                          {place.instagram ?
-                            <a href={place.instagram} target='_blank' rel="noopener noreferrer" >
-                              <FontAwesomeIcon className='place-card__social-icon'  icon={['fab', 'instagram']}  />
-                            </a>
-                            : null}
-                          {place.fb ?
-                            <a href={place.fb} target='_blank' rel="noopener noreferrer" >
-                              <FontAwesomeIcon className='place-card__social-icon'  icon={['fab', 'facebook']} />
-                            </a>
-                            : null}
-                        </ListGroupItem>
-                      </ListGroup>
                       <Link
                         className='place-card__cta'
                         to={{

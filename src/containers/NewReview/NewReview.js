@@ -51,7 +51,7 @@ export default function NewReview(props) {
           formattedReview[prop] = newReview[prop]
         }
       }
-      axios.post(`http://localhost:5000/api/v1/places/${placeId}/reviews`, formattedReview)
+      axios.post(`http://localhost:5000/api/v1/places/${placeId}/reviews`, formattedReview, {withCredentials: true})
       .then(function (response) {
         Cookies.get('jwt', response.data.token);
         props.history.push('/profile');
@@ -110,10 +110,10 @@ export default function NewReview(props) {
                   </Form.Control>
                 </Form.Group>
 
-                <Button type="submit" className="form__btn">
-                  Add Review
-                </Button>
-              </Form>
+              <Button type="submit" className="form__btn">
+                Add Review
+              </Button>
+            </Form>
           </Col>
           </Row>
         </Container>

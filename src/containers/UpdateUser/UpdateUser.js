@@ -42,12 +42,11 @@ export default function UpdateUser(props) {
       }
     }
     if (token !== null) {
-    axios.patch('http://localhost:5000/api/v1/users/updateProfile', formattedUser)
+    axios.patch('http://localhost:5000/api/v1/users/updateProfile', formattedUser, {withCredentials: true})
     .then(function (response) {
       props.history.push('/profile');
     })
     .catch(function (error) {
-      setError({errorMessage: error.response.data.message})
       console.log(error.response);
     });
   } else {

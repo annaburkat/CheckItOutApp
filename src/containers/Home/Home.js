@@ -25,7 +25,6 @@ export default function Home(props) {
   useEffect(() => {
     axios.get('http://localhost:5000/api/v1/places/top-six')
     .then(function (response) {
-      console.log(response)
       // handle success
       setPlaces(response.data)
     })

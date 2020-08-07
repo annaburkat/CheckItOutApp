@@ -52,7 +52,7 @@ export default function NewPlace(props) {
           formattedPlace[prop] = newPlace[prop]
         }
       }
-      axios.post('http://localhost:5000/api/v1/places', formattedPlace)
+      axios.post('http://localhost:5000/api/v1/places', formattedPlace, {withCredentials: true})
       .then(function (response) {
         Cookies.get('jwt', response.data.token);
         const createdPlace = response.data.data.data;
@@ -61,8 +61,10 @@ export default function NewPlace(props) {
         });
       })
       .catch(function (error) {
-        setError({errorMessage: error.response.data.message});
-        console.log(error.message);
+        if(error.response.data.message) {
+          setError({errorMessage: error.response.data.message});
+        }
+        console.log(error.response);
       });
     } else {
       props.history.push('./newPlace')
@@ -379,7 +381,7 @@ export default function NewPlace(props) {
                 </Form.Group>
 
                 <Form.Group controlId="address">
-                  <Form.Label>Address*</Form.Label>
+                  <Form.Label>Address</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Address"
@@ -424,7 +426,7 @@ export default function NewPlace(props) {
                 </Form.Group>
 
                 <Form.Group controlId="imageCover">
-                  <Form.Label>Picture</Form.Label>
+                  <Form.Label>Image Url</Form.Label>
                   <Form.Control
                     type="url"
                     placeholder="Image"
@@ -432,7 +434,7 @@ export default function NewPlace(props) {
                     onChange={handleChange}
                   />
                   <Form.Text className="text-muted">
-                    Image isn't required but well, with image would be nicer :) And it should be url
+                    Please past an image url
                   </Form.Text>
                 </Form.Group>
 
