@@ -28,7 +28,6 @@ export default function Place(props) {
     axios
     .get(`http://localhost:5000/api/v1/places/${placeId}`, {withCredentials: true})
     .then(function (response) {
-      // handle success
       setPlace(response.data.data.data)
     })
     .catch(function (error) {
@@ -40,7 +39,6 @@ export default function Place(props) {
     axios
     .get(`http://localhost:5000/api/v1/places/${placeId}/reviews`, {withCredentials: true})
     .then(function (response) {
-      // handle success
       setReviews(response.data);
       console.log(response.data)
     })
@@ -60,11 +58,11 @@ export default function Place(props) {
             <Link
               className="place__link"
               to={{
-                pathname: `/update-place/${place.slug}`,
-                state: {
-                  placeId: place._id,
-                  placeSlug: slug
-                }
+                  pathname: `/update-place/${place.slug}`,
+                  state: {
+                    placeId: place._id,
+                    placeSlug: slug
+                  }
                 }}>
                 <Button className="place__edit-btn">Edit {place.name}</Button>
             </Link>

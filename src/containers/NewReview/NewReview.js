@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import { Form, Button, Container, Col, Row, Image  } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
@@ -19,7 +18,6 @@ export default function NewReview(props) {
     axios
     .get(`http://localhost:5000/api/v1/places/${placeId}`, {withCredentials: true})
     .then(function (response) {
-      // handle success
       setPlace(response.data.data.data)
     })
     .catch(function (error) {

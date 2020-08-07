@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Link  } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 import TopNavbar from "../../components/TopNavbar";
 import Footer from "../../components/Footer";
 
 export default function Profile(props) {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    name: '',
+    email: ''
+  });
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/profile`, {withCredentials: true})
@@ -21,30 +25,6 @@ export default function Profile(props) {
     })
   }, []);
 
-  function handleChange(event) {
-    setUser({
-      ...user,
-      [event.target.id]: event.target.value
-    })
-  };
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const token = Cookies.get('jwt');
-    if (token !== null) {
-    axios.patch('http://localhost:5000/api/v1/users/updateProfile', user, {withCredentials: true})
-    .then(function (response) {
-      console.log(response);
-      props.history.push('/profile');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  } else {
-    props.history.push('./newPlace')
-    }
-  };
-
 
   return (
     <div className="profile">
@@ -57,28 +37,51 @@ export default function Profile(props) {
           </Col>
         </Row>
         <Row className="profile__main">
-          <Col xs={6} lg={3} className="d-flex">
+          <Col xs={12} lg={3} className="d-flex">
             <img src='./images/profile_2.svg' className="profile__img" alt=''/>
           </Col>
-          <Col xs={6} lg={3} className="d-flex profile__order">
+          <Col xs={12} lg={3} className="d-flex profile__order">
             <img src='./images/profile_1.svg' className="profile__img" alt=''/>
           </Col>
           <Col xs={12} lg={6}>
-            <Form className='login__form' onSubmit={handleSubmit}>
+            <Form className='login__form'>
               <h1 className='login__title'>Your profile</h1>
               <Form.Group controlId="name">
                 <Form.Label>Your Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" value={user.name} onChange={handleChange}/>
+                <Form.Control type="text" placeholder="Name" value={user.name} disabled/>
               </Form.Group>
 
               <Form.Group controlId="email">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email"  value={user.email} onChange={handleChange}/>
+                <Form.Control type="email" placeholder="Enter email"  value={user.email} disabled/>
               </Form.Group>
 
-              <Button variant="primary" type="submit" className='login__submit'>
-                Submit
-              </Button>
+              <Form.Group controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password"  value="*******" disabled/>
+              </Form.Group>
+
+              <div className="profile__buttons">
+                <Link
+                  className="profile__link"
+                  to={{
+                      pathname: `/update-user/`,
+                    }}>
+                    <Button variant="primary" type="submit" className='profile__btn'>
+                      Edit Profile
+                    </Button>
+                </Link>
+                <Link
+                  className="profile__link"
+                  to={{
+                      pathname: `/update-user/`,
+                    }}>
+                    <Button type="submit" className='profile__btn'>
+                      Delete Profile
+                    </Button>
+                </Link>
+              </div>
+
             </Form>
           </Col>
         </Row>
