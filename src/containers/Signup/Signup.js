@@ -46,6 +46,14 @@ export default function NewUser(props) {
           <Col xs={12} md={{span: 8, offset: 2}} lg={{span: 6, offset: 3}}>
             <Form className='login__form' onSubmit={handleSubmit}>
               <h1 className='login__title'>Sign in</h1>
+              <p>Have an account? &nbsp;
+              <Link
+                className="login__link"
+                to={{
+                pathname: `/login`,
+                }}>
+                 Login
+              </Link> </p>
               <Form.Group controlId="name">
                 <Form.Label>Name*</Form.Label>
                 <Form.Control

@@ -3,7 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
 // import your icons
-import { faClock, faCode, faHighlighter, faUtensils, faCoffee, faBeer, faTree, faUmbrellaBeach, faPalette, faFilm, faUserCircle, faSignOutAlt, faGlobe, faMapMarkerAlt, faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faCode, faHighlighter, faUtensils, faCoffee, faBeer, faTree, faUmbrellaBeach, faPalette, faFilm, faUserCircle, faSignOutAlt, faGlobe, faMapMarkerAlt, faHeart, faStar, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 
 import {  } from '@fortawesome/free-regular-svg-icons';
 
@@ -25,6 +25,7 @@ library.add(
   faClock,
   faHeart,
   faStar,
+  faMoneyBill,
   fab
 );
 

@@ -42,28 +42,36 @@ export default function TopNavbar(props) {
         <Nav className='mr-auto'>
         </Nav>
         <Nav className='topnav__container'>
-          <LinkContainer to='/places'>
-            <Nav.Link href='/'>All Places</Nav.Link>
-          </LinkContainer>
+
+
           { loggedIn ?
-
-
-          <NavDropdown
-            title={<div style={{display: 'inline-block'}}><FontAwesomeIcon className='' icon='user-circle' /> </div>}
-            className='topnav__dropdown dropdown'
-            id='basic-nav-dropdown dropdown-button-drop-down'
-            drop='down'
-            alignRight>
-            <NavDropdown.Item href='/profile' >
-              Profile
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item as='button' onClick={logout} className='topnav__dropdown-element'>
-              Log out
-            </NavDropdown.Item>
-          </NavDropdown>
+          <>
+            <LinkContainer to='/places'>
+              <Nav.Link href='/'>Places</Nav.Link>
+            </LinkContainer>
+            <NavDropdown
+              title={<div style={{display: 'inline-block'}}><FontAwesomeIcon className='' icon='user-circle' /> </div>}
+              className='topnav__dropdown dropdown'
+              id='basic-nav-dropdown dropdown-button-drop-down'
+              drop='down'
+              alignRight>
+              <NavDropdown.Item href='/profile' >
+                Profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as='button' onClick={logout} className='topnav__dropdown-element'>
+                Log out
+              </NavDropdown.Item>
+            </NavDropdown>
+          </>
             :
             <>
+              <LinkContainer to='/about'>
+                <Nav.Link href='/'>About</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/contact'>
+                <Nav.Link href='/'>Contact</Nav.Link>
+              </LinkContainer>
               <LinkContainer to='/login'>
                 <Nav.Link as='button' className="topnav__btn topnav__btn--login">Log in</Nav.Link>
               </LinkContainer>

@@ -3,6 +3,14 @@
   background-color: $color-primary;
   color: $color-white;
 
+  &__text{
+    margin-bottom: 30px;
+  }
+
+  &__menu {
+    padding-left: 0!important;
+  }
+
   &__logo {
     max-width: 150px;
     display:block;

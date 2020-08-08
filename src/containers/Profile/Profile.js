@@ -25,6 +25,37 @@ export default function Profile(props) {
     })
   }, []);
 
+  function handleDelete(event) {
+    event.preventDefault();
+    const token = Cookies.get('jwt');
+    if (token !== null) {
+      axios.delete(`http://localhost:5000/api/v1/users/deleteProfile`, {withCredentials: true})
+      .then(function (response) {
+        props.history.push(`/`,);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
+    } else {
+      props.history.push('./')
+    }
+  };
+
+  function handleDelete(event) {
+    event.preventDefault();
+    const token = Cookies.get('jwt');
+    if (token !== null) {
+      axios.delete(`http://localhost:5000/api/v1/users/deleteProfile`, {withCredentials: true})
+      .then(function (response) {
+        props.history.push(`/`,);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      });
+    } else {
+      props.history.push('./')
+    }
+  };
 
   return (
     <div className="profile">
@@ -71,15 +102,12 @@ export default function Profile(props) {
                       Edit Profile
                     </Button>
                 </Link>
-                <Link
-                  className="profile__link"
-                  to={{
-                      pathname: `/update-user/`,
-                    }}>
-                    <Button type="submit" className='profile__btn'>
-                      Delete Profile
-                    </Button>
-                </Link>
+                <Button
+                  type="submit"
+                  className='profile__btn'
+                  onClick={handleDelete}>
+                  Delete Profile
+                </Button>
               </div>
 
             </Form>

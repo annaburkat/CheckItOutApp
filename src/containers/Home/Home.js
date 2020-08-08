@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Container, Col, Card, Row, Jumbotron } from 'react-bootstrap';
+import { Container, Col, Card, Row, Jumbotron, Button } from 'react-bootstrap';
 import { Link  } from "react-router-dom";
 
 import TopNavbar from "../../components/TopNavbar";
@@ -40,6 +40,16 @@ export default function Home(props) {
       <Jumbotron className="hero hero--loggedOut">
         <Container>
           <h1 className="hero__title">Check It Out</h1>
+          <p className="hero__subtitle">Find places recommended by your friends.</p>
+          {
+            !loggedIn ?
+            <p className="hero__subtitle">
+            <Link
+              className="hero__link"
+              to={{
+              pathname: `/signup`,
+              }}> Signup  </Link> to find more!</p>
+            : null}
         </Container>
       </Jumbotron>
       <Container>
@@ -80,10 +90,21 @@ export default function Home(props) {
                     </Link> :null}
                   </Card>
                 </Col>
-
             )
           : null
         }
+        {
+          loggedIn ?
+          <Col xs={12}>
+            <Link
+              className="home__link"
+              to={{
+                pathname:`/places`,
+                }}>
+                <Button className="home__link-btn">Explore all places</Button>
+            </Link>
+          </Col>
+          :null}
         </Row>
       </Container>
       <Footer history={props.history}/>

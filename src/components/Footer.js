@@ -22,15 +22,15 @@ export default function Footer(props) {
         <Row>
           <Col xs={12} sm={12} lg={5}>
             <Link to='/' className="footer__logo-link">
-              <img src="./logo.png" alt="log" className="footer__logo"/>
+              <img src="/logo.png" alt="log" className="footer__logo"/>
             </Link>
             <h5 className="title text-left">Find you place</h5>
-            <p className="text-left">
-              The best coffee in the city, interesting museum or maybe a&nbsp;spot for picnic? You can find them all here! 
+            <p className="text-left footer__text">
+              Find amazing locations recommended by your like-minded friends!
             </p>
           </Col>
           <Col xs={12} sm={6} lg={{span: 3, offset: 1}}>
-            <ul>
+            <ul className="footer__menu">
               <li className="list-unstyled">
                 <a className="footer__link" href="/login">Login</a>
               </li>
@@ -43,7 +43,7 @@ export default function Footer(props) {
             </ul>
           </Col>
           <Col xs={12} md={6} lg={3}>
-            <ul>
+            <ul className="footer__menu">
               <li className="list-unstyled">
                 <a className="footer__link" href="/contact">Contact</a>
               </li>

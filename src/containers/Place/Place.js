@@ -70,7 +70,7 @@ export default function Place(props) {
         </Row>
         <Row>
           <Col xs={12} md={11} lg={{span: 10, offset: 1}} className="place__img-wrapper" >
-            <span className="place__sticker">{place.city} / {place.category}</span>
+            <span className="place__sticker">{place.city} / {place.category}/Rating {place.ratingsAverage}</span>
             <Image src={place.imageCover} className="place__img"/>
           </Col>
           <Col xs={12} md={1}>
@@ -96,16 +96,18 @@ export default function Place(props) {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} lg={6}>
-            <div>{place.description}</div>
+          <Col xs={12} lg={6} xl={{span:4, offset: 1}}>
+            <div className="place__description">{place.description}</div>
           </Col>
-          <Col xs={12} lg={6}>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>
+          <Col xs={12} lg={{span:5, offset: 1}}>
+            <ListGroup className="list-group-flush place__list-group">
+              <ListGroupItem className="place__list">
                 <FontAwesomeIcon className='place-card__icon' icon='map-marker-alt' />{place.address}</ListGroupItem>
-              <ListGroupItem>
+              <ListGroupItem className="place__list">
                 <FontAwesomeIcon className='place-card__icon' icon='clock' />{place.opening}</ListGroupItem>
-              <ListGroupItem className="place-card__social-icons">
+              <ListGroupItem className="place__list">
+                <FontAwesomeIcon className='place-card__icon' icon='money-bill' />Prices: {place.priceRange} | Average price: {place.averagePrice} euro</ListGroupItem>
+              <ListGroupItem className="place-card__social-icons place__list">
                 {place.website ?
                   <a href={place.website} target='_blank' rel="noopener noreferrer" >
                     <FontAwesomeIcon className='place-card__social-icon' icon='globe' />
@@ -128,19 +130,16 @@ export default function Place(props) {
         { reviews.length ?
         <div className="reviews">
           <Row>
-            <Col xs={10} lg={{span: 9, offset: 1}} className="reviews__title">
-              <h1 className="page__title">Reviews</h1>
-            </Col>
-            <Col xs={2} lg={2} className="place__title">
+            <Col xs={12} lg={{span: 10, offset: 1}} className="place__title">
+              <h1 className="page__title">Do you know {place.name}?</h1>
               <Link
                 to={{
-                  pathname: `/places/${place._id}/reviews`,
+                  pathname: `/places/${place.slug}/reviews`,
                   state: {
-                    placeId: place._id,
-                    placeSlug: slug
+                    placeId: place._id
                   }
                   }}>
-                  <Button>Add review</Button>
+                  <Button className="place__review-btn">Add review</Button>
               </Link>
             </Col>
           </Row>
@@ -172,7 +171,6 @@ export default function Place(props) {
           <Col xs={12} lg={{span: 10, offset: 1}} className="place__title">
             <h1 className="page__title">Do you know {place.name}?</h1>
             <Link
-
               to={{
                 pathname: `/places/${place.slug}/reviews`,
                 state: {

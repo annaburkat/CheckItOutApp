@@ -7,7 +7,7 @@
     background-color: $color-basicBright;
     max-width: 95%;
     margin: 70px auto;
-    padding: 40px 15px;
+    padding: 30px 15px;
     border-radius: 5px;
     -webkit-box-shadow: 5px 5px 30px 0 rgba(4,20,37,.7);
     -moz-box-shadow: 5px 5px 30px 0 rgba(4,20,37,.7);
@@ -22,6 +22,11 @@
     color: $color-basicDark;
   }
 
+  &__link{
+    color: $color-primary;
+    font-weight: bold;
+  }
+
   &__forgot {
     font-weight: bold;
     color: $color-pinki;
@@ -34,12 +39,13 @@
     font-weight: bold;
     margin: 30px auto 0!important;
     width: 80%;
-    display: block;
+    display: block!important;
   }
 
   &__terms {
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 12px;
+    margin-bottom: 0px!important;
   }
 
   @include md {
