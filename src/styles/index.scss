@@ -27,6 +27,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.page-padding {
+  padding: 50px 0;
+}
+
+.page__img {
+  max-width: 90%;
+  margin: 30px auto;
+}
+
 .page__title {
   font-size: 28px;
   font-weight: bold;

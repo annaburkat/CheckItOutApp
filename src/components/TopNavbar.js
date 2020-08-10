@@ -66,7 +66,7 @@ export default function TopNavbar(props) {
           </>
             :
             <>
-              <LinkContainer to='/about'>
+              <LinkContainer to='/about-s'>
                 <Nav.Link href='/'>About</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/contact'>

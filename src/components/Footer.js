@@ -38,7 +38,7 @@ export default function Footer(props) {
                 <a className="footer__link" href="/places">Places</a>
               </li>
               <li className="list-unstyled">
-                <a className="footer__link" href="/about">About</a>
+                <a className="footer__link" href="/about-us">About</a>
               </li>
             </ul>
           </Col>
@@ -46,9 +46,6 @@ export default function Footer(props) {
             <ul className="footer__menu">
               <li className="list-unstyled">
                 <a className="footer__link" href="/contact">Contact</a>
-              </li>
-              <li className="list-unstyled">
-                <a className="footer__link" href="/terms-and-conditions">Terms & Conditions</a>
               </li>
               <li className="list-unstyled">
                 <a className="footer__link" href="/privacy-policy">Privacy Policy</a>

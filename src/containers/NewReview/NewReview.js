@@ -54,7 +54,9 @@ export default function NewReview(props) {
       axios.post(`http://localhost:5000/api/v1/places/${placeId}/reviews`, formattedReview, {withCredentials: true})
       .then(function (response) {
         Cookies.get('jwt', response.data.token);
-        props.history.push('/profile');
+        props.history.push(`/places/${place.slug}`, {
+            placeId: place._id
+        });
       })
       .catch(function (error) {
         console.log(error.message);

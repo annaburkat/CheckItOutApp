@@ -90,11 +90,6 @@ export default function NewUser(props) {
                 By clicking Register I agree to Check It Out’s
                 <Link
                   to={{
-                      pathname: `/terms-and-conditions`}}><b> Terms & Conditions </b>
-                </Link>
-                and
-                <Link
-                  to={{
                       pathname: `/privacy-policy`}}><b> Privacy Policy</b>
                 </Link>.
               </p>

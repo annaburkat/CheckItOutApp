@@ -13,11 +13,14 @@ import UpdatePlace from './containers/UpdatePlace/UpdatePlace';
 import NewReview from './containers/NewReview/NewReview';
 import UpdateUser from './containers/UpdateUser/UpdateUser';
 import ForgotPassword from './containers/ForgotPassword/ForgotPassword';
+import PrivacyPolicy from './containers/PrivacyPolicy/PrivacyPolicy';
+import About from './containers/About/About';
 
 export default ({ childProps }) =>
   <Switch>
     <Route path="/" exact component={Home} props={childProps} />
     <Route path="/contact" exact component={Contact} props={childProps} />
+    <Route path="/privacy-policy" exact component={PrivacyPolicy} props={childProps} />
     <Route path="/signup" exact component={Signup} props={childProps} />
     <Route path="/login" exact component={Login} props={childProps} />
     <Route path="/profile" exact component={Profile} props={childProps} />
@@ -28,5 +31,6 @@ export default ({ childProps }) =>
     <Route path="/places" exact component={Places} props={childProps} />
     <Route path="/new-place" exact component={NewPlace} props={childProps} />
     <Route path="/places/:slug/reviews" exact component={NewReview} props={childProps} />
+    <Route path="/about-us" exact component={About} props={childProps} />
     <Route component={NotFound} />
   </Switch>;
