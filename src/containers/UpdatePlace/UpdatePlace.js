@@ -525,7 +525,7 @@ export default function UpdatePlace(props) {
               { error.errorMessage && <p className="form__error"> { error.errorMessage } </p> }
 
               <Button type="submit" className="form__btn">
-                Add New Place
+                Edit Place
               </Button>
             </Form>
           </Col>

@@ -102,12 +102,6 @@ export default function Profile(props) {
                       Edit Profile
                     </Button>
                 </Link>
-                <Button
-                  type="submit"
-                  className='profile__btn'
-                  onClick={handleDelete}>
-                  Delete Profile
-                </Button>
               </div>
 
             </Form>

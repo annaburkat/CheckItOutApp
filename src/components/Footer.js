@@ -34,9 +34,10 @@ export default function Footer(props) {
               <li className="list-unstyled">
                 <a className="footer__link" href="/login">Login</a>
               </li>
+              {loggedIn ?
               <li className="list-unstyled">
                 <a className="footer__link" href="/places">Places</a>
-              </li>
+              </li> : null}
               <li className="list-unstyled">
                 <a className="footer__link" href="/about-us">About</a>
               </li>
